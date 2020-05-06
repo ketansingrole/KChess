@@ -1,0 +1,36 @@
+<html>
+<head>
+
+  <!--  Including jQuery, another tool chessboardjs uses:-->
+  <script src="jquery/jquery-3.4.1.min.js"></script>
+<!--  Including the chessboardjs files:-->
+    <script src="./js/chessboard-1.0.0.min.js"></script>
+    <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
+
+
+  
+  </head>
+<body>
+  <div id="board1" style="width: 400px"></div>
+  </body>
+
+  
+  
+<!--
+  Now including our own custom JS
+  Note that we could write JS directly in between the script tags if you'd 
+  rather, but i didn't want to so i put it in a new file. 
+-->
+<script>
+// --- Begin Example JS --------------------------------------------------------
+var config = {
+  draggable: true,
+  dropOffBoard: 'snapback', // this is the default
+  position: 'start'
+}
+var board = Chessboard('board1', config)
+// --- End Example JS ----------------------------------------------------------
+
+</script>
+
+</html>

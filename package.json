@@ -1,0 +1,27 @@
+{
+  "name": "kchess",
+  "version": "1.0.0",
+  "description": "A chess preogram for everyone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ketansingrole/KChess.git"
+  },
+  "keywords": [
+    "chess"
+  ],
+  "author": "Ketan Singrole",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ketansingrole/KChess/issues"
+  },
+  "homepage": "https://github.com/ketansingrole/KChess#readme",
+  "devDependencies": {
+    "electron": "^8.2.5"
+  },
+  "dependencies": {}
+}
