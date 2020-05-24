@@ -30,7 +30,7 @@
   "build": {
     "appId": "org.KChess.KChess",
     "win": {
-      "target": "MSI",
+      "target": "nsis",
       "icon": "/build/bk.ico"
     }
   }
