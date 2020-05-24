@@ -1,11 +1,13 @@
 {
-  "name": "kchess",
+  "name": "KChess",
   "version": "1.0.0",
-  "description": "A chess preogram for everyone",
+  "description": "A chess program for everyone",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -21,7 +23,15 @@
   },
   "homepage": "https://github.com/ketansingrole/KChess#readme",
   "devDependencies": {
-    "electron": "^8.2.5"
+    "electron": "^8.2.5",
+    "electron-builder": "^22.6.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "build": {
+    "appId": "org.KChess.KChess",
+    "win": {
+      "target": "MSI",
+      "icon": "/build/bk.ico"
+    }
+  }
 }

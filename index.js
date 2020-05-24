@@ -13,6 +13,8 @@ function createWindow () {
     }
   })
 
+  mainWindow.maximize()
+  // mainWindow.setResizable(false)
   // and load the index.html of the app.
   mainWindow.loadFile('./chessboardjs-1.0.0/index.html')
 
