@@ -5,6 +5,7 @@
   <script src="jquery/jquery-3.4.1.min.js"></script>
 <!--  Including the chessboardjs files:-->
     <script src="./js/chessboard-1.0.0.min.js"></script>
+    <script src="../chess.js-master/chess.js"></script>
     <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
 
 
@@ -18,12 +19,9 @@
 
   
   
-<!--
-  Now including our own custom JS
-  Note that we could write JS directly in between the script tags if you'd 
-  rather, but i didn't want to so i put it in a new file. 
--->
+  
 <script>
+  
 // --- Begin Example JS --------------------------------------------------------
 var config = {
   draggable: true,
@@ -31,6 +29,11 @@ var config = {
   position: 'start'
 }
 var board = Chessboard('board1', config)
+// var Chess = require('./chess').Chess;
+var chess = new Chess();
+console.log("displaying chess values")
+
+console.log(chess.pgn());
 // --- End Example JS ----------------------------------------------------------
 
 </script>
