@@ -21,19 +21,33 @@
   
   
 <script>
-  
+  var chess = new Chess();
+  function onDrop (source, target, piece, newPos, oldPos, orientation) {
+  console.log('Source: ' + source)
+  console.log('Target: ' + target)
+  console.log('Piece: ' + piece)
+  console.log('New position: ' + Chessboard.objToFen(newPos))
+  console.log('Old position: ' + Chessboard.objToFen(oldPos))
+  console.log('Orientation: ' + orientation)
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+  if(chess.move({ from: source, to: target }) == null){
+    return 'snapback'
+  }
+
+  console.log("displaying chess values")
+  console.log(chess.pgn());
+}
 // --- Begin Example JS --------------------------------------------------------
 var config = {
   draggable: true,
   dropOffBoard: 'snapback', // this is the default
+  onDrop: onDrop,
   position: 'start'
 }
 var board = Chessboard('board1', config)
 // var Chess = require('./chess').Chess;
-var chess = new Chess();
-console.log("displaying chess values")
 
-console.log(chess.pgn());
+
 // --- End Example JS ----------------------------------------------------------
 
 </script>
