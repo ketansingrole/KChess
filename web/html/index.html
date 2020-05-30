@@ -1,23 +1,63 @@
 <html>
 <head>
+    <!--  Including jQuery, another tool chessboardjs uses:-->
+    <script src="../../chessboardjs-1.0.0/jquery/jquery-3.4.1.min.js"></script>
+    <!--  Including the chessboardjs files:-->
+    <script src="../../chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
+    <script src="../../chess.js-master/chess.js"></script>
+    <link rel="stylesheet" href="../../chessboardjs-1.0.0/css/chessboard-1.0.0.min.css">
+</head>
 
-  <!--  Including jQuery, another tool chessboardjs uses:-->
-  <script src="jquery/jquery-3.4.1.min.js"></script>
-<!--  Including the chessboardjs files:-->
-    <script src="./js/chessboard-1.0.0.min.js"></script>
-    <script src="../chess.js-master/chess.js"></script>
-    <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
-
-
+<style>
+  body{
+    margin: 0%;
+    background-color: #FBF2ED;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: 3% 50%;
+    margin: 0%;
+    border: 0%;
+    height: 100%;
+  }
   
-  </head>
+  .nav-bar{
+    padding: 5%;
+    display: grid;
+    background-color: #233152;
+    grid-template-columns: 100%;
+  }
+  #settings{
+    width: 100%;
+    opacity: .5;
+    align-self: end;
+  }
+  #settings:hover{
+    opacity: 1;
+  }
+  #board1{
+    margin: 5%;
+    align-self: center;
+  }
+  
+
+</style>
+
+
+
 <body>
   <div class="container">
-  <div id="board1" style="width: 50%"></div>
-  </div>
-  </body>
+    <div class="nav-bar">
+      <div id="settings">
+        <img id="settings" src="../assets/settings-white-48dp.svg" alt="settings">
+      </div>
 
-  
+    </div>
+    <div id="board1"></div>
+  </div>
+</body>
+
+
   
   
 <script>
@@ -30,7 +70,8 @@
 // 	// languages list available, no need to wait
 // 	textToSpeech()
 // }
-
+const sound = new Audio()
+sound.src = "../assets/Move.mp3"
 function textToSpeech(text_position) {
 	// get all voices that browser offers
 	var available_voices = window.speechSynthesis.getVoices();
@@ -82,6 +123,7 @@ function textToSpeech(text_position) {
 
   console.log("displaying chess values")
   console.log(chess.pgn());
+  sound.play()
   // temp = chess.history();
   // textToSpeech(temp[temp.length-1]);
 }
@@ -96,10 +138,15 @@ var config = {
   onDrop: onDrop,
   showNotation: true,
   onSnapEnd: onSnapEnd,
-  pieceTheme: 'img/chesspieces/cburnett/{piece}.svg',
+  pieceTheme: '../../chessboardjs-1.0.0/img/chesspieces/cburnett/{piece}.svg',
   position: 'start'
 }
 var board = Chessboard('board1', config)
+
+window.addEventListener('resize', () => {
+    console.log("RESIZE");
+    board.resize();
+});
 // var Chess = require('./chess').Chess;
 
 
