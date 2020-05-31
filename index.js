@@ -1,8 +1,5 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
-// const board = require('@chrisoakman/chessboardjs')
-const os = require('os');
-const storage = require('electron-json-storage');
 const path = require('path')
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
