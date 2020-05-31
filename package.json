@@ -23,10 +23,14 @@
   },
   "homepage": "https://github.com/ketansingrole/KChess#readme",
   "devDependencies": {
-    "electron": "^8.2.5",
-    "electron-builder": "^22.6.1"
+    "electron": "^8.3.0",
+    "electron-builder": "^22.7.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@chrisoakman/chessboardjs": "^1.0.0",
+    "chess.js": "^0.10.3",
+    "electron-json-storage": "^4.1.8"
+  },
   "build": {
     "appId": "org.KChess.KChess",
     "win": {
