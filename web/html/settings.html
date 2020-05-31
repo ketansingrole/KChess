@@ -1,135 +1,141 @@
 <html>
-<head>
+  <head>
     <!--  Including jQuery, another tool chessboardjs uses:-->
     <script src="../../chessboardjs-1.0.0/jquery/jquery-3.4.1.min.js"></script>
     <!--  Including the chessboardjs files:-->
     <script src="../../chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
     <script src="../../chess.js-master/chess.js"></script>
-    <link rel="stylesheet" href="../../chessboardjs-1.0.0/css/chessboard-1.0.0.min.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="../../chessboardjs-1.0.0/css/chessboard-1.0.0.min.css"
+    />
+  </head>
 
-<style>
-  @font-face {
-    font-family: roboto;
-    src: url('../assets/Roboto-Regular.ttf');
-    } 
-  body{
-    margin: 0%;
-    background-color: #FBF2ED;
-    font-family: roboto;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: 3% 97%;
-    grid-template-rows: 100%;
-    margin: 0%;
-    border: 0%;
-    height: 100%;
-  }
-  
-  .nav-bar{
-    padding: 5%;
-    display: grid;
-    background-color: #233152;
-    grid-template-columns: 100%;
-  }
-  #back{
-    width: 100%;
-    opacity: .5;
-    /* align-self: end; */
-  }
-  #back:hover{
-    opacity: 1;
-  }
-  #board1{
-    margin: 5%;
-    align-self: center;
-  }
-  #moveList{
-    margin: 5%;
-    align-self: center;
-    border: 1%;
-    overflow-y: scroll;
-    height: 70%;
-    width: 70%;
-    
-  }
-  .settings{
-    display: grid;
-    grid-template-columns: 20% 20% 30% 20%;
-    /* align-self: center;
-    justify-self: center; */
-      
-  }
-  .settingHeadings{
-    display: grid;
-    grid-template-columns: 100%;
-    align-self: center;
-  }
-  .settingscontent{
-    display: grid;
-    grid-template-columns: 100%;
-    align-self: center;
-  }
-
-  table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-  background-color: black;
-
-  }
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even){background-color: #F0D9B5}
-
-tr:nth-child(odd){color: white;}
-
-
-</style>
-<body>
-    <div class="container">
-        <div class="nav-bar">
-            <div id="back">
-                <a href="index.html"><img id="back"  src="../assets/arrow_back-white-48dp.svg" alt="back"></a>
-            </div>
-        </div>
-        <div class="settings">
-            <div>
-
-            </div>
-            <div class="settingHeadings">
-                <ul style="list-style-type:none;">
-                <li>General Settings</li>
-                </ul>
-            </div>
-            <div class="settingsContent">
-                <h4>Sounds</h4>
-                Controls whether the sounds should be played or voice or you can completely turn it off.
-                <select name="sound" id="sounds" onchange="saveSound(this.value)">
-                    <option value="None">None</option>
-                    <option value="voice">Voice</option>
-                    <option value="sound">sound</option>
-                    <option value="both">Both</option>
-                  </select>
-            </div>
-        </div>
-    </div>  
-</body>
-</html>
-<script>
-    const os = require('os');
-    const storage = require('electron-json-storage');
-    const defaultDataPath = storage.getDefaultDataPath()
-    function saveSound(val){
-        let soundConfig = document.getElementById("sounds");
-        console.log(val)
-        console.log(defaultDataPath)
+  <style>
+    @font-face {
+      font-family: roboto;
+      src: url("../assets/Roboto-Regular.ttf");
+    }
+    body {
+      margin: 0%;
+      background-color: #fbf2ed;
+      font-family: roboto;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 3% 97%;
+      grid-template-rows: 100%;
+      margin: 0%;
+      border: 0%;
+      height: 100%;
     }
 
+    .nav-bar {
+      padding: 5%;
+      display: grid;
+      background-color: #233152;
+      grid-template-columns: 100%;
+    }
+    #back {
+      width: 100%;
+      opacity: 0.5;
+      /* align-self: end; */
+    }
+    #back:hover {
+      opacity: 1;
+    }
+    #board1 {
+      margin: 5%;
+      align-self: center;
+    }
+    #moveList {
+      margin: 5%;
+      align-self: center;
+      border: 1%;
+      overflow-y: scroll;
+      height: 70%;
+      width: 70%;
+    }
+    .settings {
+      display: grid;
+      grid-template-columns: 20% 20% 30% 20%;
+      /* align-self: center;
+    justify-self: center; */
+    }
+    .settingHeadings {
+      display: grid;
+      grid-template-columns: 100%;
+      align-self: center;
+    }
+    .settingscontent {
+      display: grid;
+      grid-template-columns: 100%;
+      align-self: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+      background-color: black;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f0d9b5;
+    }
+
+    tr:nth-child(odd) {
+      color: white;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="nav-bar">
+        <div id="back">
+          <a href="index.html"
+            ><img
+              id="back"
+              src="../assets/arrow_back-white-48dp.svg"
+              alt="back"
+          /></a>
+        </div>
+      </div>
+      <div class="settings">
+        <div></div>
+        <div class="settingHeadings">
+          <ul style="list-style-type: none;">
+            <li>General Settings</li>
+          </ul>
+        </div>
+        <div class="settingsContent">
+          <h4>Sounds</h4>
+          Controls whether the sounds should be played or voice or you can
+          completely turn it off.
+          <select name="sound" id="sounds" onchange="saveSound(this.value)">
+            <option value="None">None</option>
+            <option value="voice">Voice</option>
+            <option value="sound">sound</option>
+            <option value="both">Both</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  const os = require("os");
+  const storage = require("electron-json-storage");
+  const defaultDataPath = storage.getDefaultDataPath();
+  function saveSound(val) {
+    let soundConfig = document.getElementById("sounds");
+    console.log(val);
+    console.log(defaultDataPath);
+  }
 </script>

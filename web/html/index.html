@@ -1,242 +1,213 @@
 <html>
-<head>
-    <!--  Including jQuery, another tool chessboardjs uses:-->
+  <head>
     <script>
-      window.$ = window.jQuery = require("../../chessboardjs-1.0.0/jquery/jquery-3.4.1.min.js")
-      const { Chess } = require('chess.js')
+      window.$ = window.jQuery = require("jquery");
+      const { Chess } = require("chess.js");
+      require("@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.js");
     </script>
-    <!-- <script src="../../chessboardjs-1.0.0/jquery/jquery-3.4.1.min.js"></script> -->
-    <script src="../../chessboardjs-1.0.0/js/chessboard-1.0.0.min.js"></script>
-     <!-- Including the chessboardjs files: -->
-    <!-- <script src="../../chess.js-master/chess.js"></script> -->
+  </head>
 
-    <link rel="stylesheet" href="../../chessboardjs-1.0.0/css/chessboard-1.0.0.min.css">
-</head>
+  <style>
+    @import url("../../node_modules/@chrisoakman/chessboardjs/dist/chessboard-1.0.0.min.css");
+    @font-face {
+      font-family: roboto;
+      src: url("../assets/Roboto-Regular.ttf");
+    }
+    body {
+      margin: 0%;
+      background-color: #fbf2ed;
+      font-family: roboto;
+      height: 100%;
+      overflow: hidden;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 3% 50% 47%;
+      /* grid-template-rows: 100%; */
+      margin: 0%;
+      border: 0%;
+      height: 100%;
+    }
 
-<style>
-  @font-face {
-    font-family: roboto;
-    src: url('../assets/Roboto-Regular.ttf');
-    } 
-  body{
-    margin: 0%;
-    background-color: #FBF2ED;
-    font-family: roboto;
-    height: 100%;
-    overflow: hidden;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: 3% 50% 47%;
-    /* grid-template-rows: 100%; */
-    margin: 0%;
-    border: 0%;
-    height: 100%;
-  }
-  
-  .nav-bar{
-    padding: 5%;
-    display: grid;
-    background-color: #233152;
-    grid-template-columns: 100%;
-  }
-  #settings{
-    width: 100%;
-    opacity: .5;
-    align-self: end;
-  }
-  #settings:hover{
-    opacity: 1;
-  }
-  #board1{
-    margin: 5%;
-    align-self: center;
-  }
-  #moveList{
-    margin: 5%;
-    align-self: center;
-    border: 1%;
-    overflow-y: scroll;
-    height: 70%;
-    width: 70%;
-    
-  }
-  table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
-  background-color: #B58863;
+    .nav-bar {
+      padding: 5%;
+      display: grid;
+      background-color: #233152;
+      grid-template-columns: 100%;
+    }
+    #settings {
+      width: 100%;
+      opacity: 0.5;
+      align-self: end;
+    }
+    #settings:hover {
+      opacity: 1;
+    }
+    #board1 {
+      margin: 5%;
+      align-self: center;
+    }
+    #moveList {
+      margin: 5%;
+      align-self: center;
+      border: 1%;
+      overflow-y: scroll;
+      height: 70%;
+      width: 70%;
+    }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #ddd;
+      background-color: #b58863;
+    }
 
-  }
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+      font-size: 20px;
+    }
 
-th, td {
-  text-align: left;
-  padding: 8px;
-  font-size: 20px;
-}
+    tr:nth-child(even) {
+      background-color: #f0d9b5;
+    }
 
-tr:nth-child(even){background-color: #F0D9B5}
+    /* tr:nth-child(odd){color: white;} */
+  </style>
 
-/* tr:nth-child(odd){color: white;} */
-
-
-</style>
-
-
-
-<body>
-  <div class="container">
-    <div class="nav-bar">
-      <div id="settings">
-        <a href="settings.html"><img id="settings"  src="../assets/settings-white-48dp.svg" alt="settings"></a>
+  <body>
+    <div class="container">
+      <div class="nav-bar">
+        <div id="settings">
+          <a href="settings.html"
+            ><img
+              id="settings"
+              src="../assets/settings-white-48dp.svg"
+              alt="settings"
+          /></a>
+        </div>
       </div>
-
+      <div id="board1"></div>
+      <div id="moveList">
+        <table id="moveListTable">
+          <tr style="font-color: white;">
+            <th>Move No.</th>
+            <th>White Move</th>
+            <th>Black Move</th>
+          </tr>
+        </table>
+      </div>
     </div>
-    <div id="board1"></div>
-    <div id="moveList">
-      <table id="moveListTable">
-        <tr style="font-color: white;">
-          <th>Move No.</th>
-          <th>White Move</th>
-          <th>Black Move</th>
-        </tr>
-      </table>
-    </div>
-  </div>
-</body>
+  </body>
 
+  <script>
+    const sound = new Audio();
+    sound.src = "../assets/Move.mp3";
+    function textToSpeech(text_position) {
+      // get all voices that browser offers
+      var available_voices = window.speechSynthesis.getVoices();
 
-  
-  
-<script>
+      // this will hold an english voice
+      var english_voice = "";
 
-//   if(window.speechSynthesis.getVoices().length == 0) {
-// 	window.speechSynthesis.addEventListener('voiceschanged', function() {
-// 		textToSpeech();
-// 	});
-// }
-// else {
-// 	// languages list available, no need to wait
-// 	textToSpeech()
-// }
-const sound = new Audio()
-sound.src = "../assets/Move.mp3"
-function textToSpeech(text_position) {
-	// get all voices that browser offers
-	var available_voices = window.speechSynthesis.getVoices();
+      // find voice by language locale "en-US"
+      // if not then select the first voice
+      for (var i = 0; i < available_voices.length; i++) {
+        if (available_voices[i].lang === "en-US") {
+          english_voice = available_voices[i];
+          break;
+        }
+      }
+      if (english_voice === "") english_voice = available_voices[0];
 
-	// this will hold an english voice
-	var english_voice = '';
+      // new SpeechSynthesisUtterance object
+      var utter = new SpeechSynthesisUtterance();
+      utter.rate = 1;
+      utter.pitch = 0.5;
+      utter.text = text_position;
+      utter.voice = english_voice;
 
-	// find voice by language locale "en-US"
-	// if not then select the first voice
-	for(var i=0; i<available_voices.length; i++) {
-		if(available_voices[i].lang === 'en-US') {
-			english_voice = available_voices[i];
-			break;
-		}
-	}
-	if(english_voice === '')
-		english_voice = available_voices[0];
+      // event after text has been spoken
+      // utter.onend = function() {
+      // 	alert('Speech has finished');
+      // }
 
-	// new SpeechSynthesisUtterance object
-	var utter = new SpeechSynthesisUtterance();
-	utter.rate = 1;
-	utter.pitch = 0.5;
-	utter.text = text_position;
-	utter.voice = english_voice;
+      // speak
+      window.speechSynthesis.speak(utter);
+    }
 
-	// event after text has been spoken
-	// utter.onend = function() {
-	// 	alert('Speech has finished');
-	// }
+    var chess = new Chess();
+    let moveCount = 1;
+    function onDrop(source, target, piece, newPos, oldPos, orientation) {
+      console.log("Source: " + source);
+      console.log("Target: " + target);
+      console.log("Piece: " + piece);
+      console.log("New position: " + Chessboard.objToFen(newPos));
+      console.log("Old position: " + Chessboard.objToFen(oldPos));
+      console.log("Orientation: " + orientation);
+      console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+      if (chess.move({ from: source, to: target, promotion: "q" }) == null) {
+        return "snapback";
+      }
+      console.log("displaying chess values");
+      console.log(chess.pgn());
+      sound.play();
+      temp = chess.history();
 
-	// speak
-	window.speechSynthesis.speak(utter);
-}
+      textToSpeech(temp[temp.length - 1]);
+      if (moveCount % 2 === 0) {
+        console.log(Math.round(moveCount / 2));
+        let row = document.getElementById("" + Math.round(moveCount / 2));
+        var cell3 = row.cells[2];
+        cell3.innerHTML = temp[temp.length - 1];
+        console.log("black to move");
+      } else {
+        console.log("white to move");
+        let table = document.getElementById("moveListTable");
+        var row = table.insertRow();
+        row.id = Math.round(moveCount / 2);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = Math.round(moveCount / 2);
+        cell2.innerHTML = temp[temp.length - 1];
+        cell3.innerHTML = "";
+        table.scrollIntoView(false);
+      }
+      // if(Math.round(moveCount/2)%2 == 0){
 
-  var chess = new Chess();
-  let moveCount = 1;
-  function onDrop (source, target, piece, newPos, oldPos, orientation) {
-  console.log('Source: ' + source)
-  console.log('Target: ' + target)
-  console.log('Piece: ' + piece)
-  console.log('New position: ' + Chessboard.objToFen(newPos))
-  console.log('Old position: ' + Chessboard.objToFen(oldPos))
-  console.log('Orientation: ' + orientation)
-  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-  if(chess.move({ from: source, to: target, promotion: 'q'}) == null){
-    
-    return 'snapback'
-  }
-  
+      // }else{
+      //   let row = document.getElementById(""+Math.round(moveCount/2));
+      //   row.setAttribute(,"white")
+      // }
+      moveCount += 1;
+      console.log(moveCount);
+    }
 
-  // textToSpeech(piece+" "+source+" "+target)
-  
-  
-  // table.append("<tr id=1> <td>1</td><td>f4</td><td>f5</td></tr>")
-  console.log("displaying chess values")
-  console.log(chess.pgn());
-  sound.play()
-  temp = chess.history();
-  
-  textToSpeech(temp[temp.length-1]);
-  if(moveCount%2 === 0)
-  {
-    console.log(Math.round(moveCount/2))
-    let row = document.getElementById(""+Math.round(moveCount/2));
-    var cell3 = row.cells[2]
-    cell3.innerHTML = temp[temp.length-1];
-    console.log("black to move")
-  }else{
-    console.log("white to move")
-    let table = document.getElementById("moveListTable");
-    var row = table.insertRow();
-    row.id = Math.round(moveCount/2);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    cell1.innerHTML = Math.round(moveCount/2);
-    cell2.innerHTML = temp[temp.length-1];
-    cell3.innerHTML = "";
-    table.scrollIntoView(false);
-  }
-  // if(Math.round(moveCount/2)%2 == 0){
+    function onSnapEnd() {
+      board.position(chess.fen());
+    }
+    // --- Begin Example JS --------------------------------------------------------
+    var config = {
+      draggable: true,
+      dropOffBoard: "snapback", // this is the default
+      onDrop: onDrop,
+      showNotation: true,
+      onSnapEnd: onSnapEnd,
+      pieceTheme:
+        "../../chessboardjs-1.0.0/img/chesspieces/cburnett/{piece}.svg",
+      position: "start",
+    };
+    var board = Chessboard("board1", config);
 
-  // }else{
-  //   let row = document.getElementById(""+Math.round(moveCount/2));
-  //   row.setAttribute(,"white")
-  // }
-  moveCount += 1;
-  console.log(moveCount)
-  
-}
+    window.addEventListener("resize", () => {
+      console.log("RESIZE");
+      board.resize();
+    });
+    // var Chess = require('./chess').Chess;
 
-function onSnapEnd () {
-  board.position(chess.fen())
-}
-// --- Begin Example JS --------------------------------------------------------
-var config = {
-  draggable: true,
-  dropOffBoard: 'snapback', // this is the default
-  onDrop: onDrop,
-  showNotation: true,
-  onSnapEnd: onSnapEnd,
-  pieceTheme: '../../chessboardjs-1.0.0/img/chesspieces/cburnett/{piece}.svg',
-  position: 'start'
-}
-var board = Chessboard('board1', config)
-
-window.addEventListener('resize', () => {
-    console.log("RESIZE");
-    board.resize();
-});
-// var Chess = require('./chess').Chess;
-
-
-// --- End Example JS ----------------------------------------------------------
-
-</script>
-
+    // --- End Example JS ----------------------------------------------------------
+  </script>
 </html>
