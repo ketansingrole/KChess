@@ -45,7 +45,8 @@
       "executableName": "kchess",
       "target": [
         "deb",
-        "snap"
+        "snap",
+        "AppImage"
       ],
       "icon": "build/bK.png",
       "category": "Utility"
