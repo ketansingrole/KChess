@@ -16,7 +16,7 @@
   "keywords": [
     "chess"
   ],
-  "author": "Ketan Singrole",
+  "author": "Ketan Singrole <singroleketan@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ketansingrole/KChess/issues"
@@ -39,12 +39,16 @@
       "icon": "/build/bk.ico"
     },
     "linux": {
+      "executableName":"kchess",
       "target": [
         "deb",
-        "snap",
-        "rpm"
+        "snap"
       ],
+      "icon": "build/bK.png",
       "category": "Utility"
+    },
+    "snap":{
+      "confinement":"classic"
     }
   }
 }
