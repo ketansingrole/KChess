@@ -20,5 +20,6 @@ jobs:
           node-version: 12
 
       - name: Build/release Electron app
-        run: npm run dist
+      - run: npm install
+      - run: npm run dist
         
