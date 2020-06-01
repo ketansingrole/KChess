@@ -37,6 +37,14 @@
     "win": {
       "target": "nsis",
       "icon": "/build/bk.ico"
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "snap",
+        "rpm"
+      ],
+      "category": "Utility"
     }
   }
 }
