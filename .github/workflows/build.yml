@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+          github_token: ${{ secrets.github_token }}
       - run: npm install
       - run: npm run dist
+      
      
