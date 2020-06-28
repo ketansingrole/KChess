@@ -1,6 +1,6 @@
 {
   "name": "KChess",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "A chess program for everyone",
   "main": "index.js",
   "scripts": {
