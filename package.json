@@ -1,6 +1,6 @@
 {
   "name": "KChess",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A chess program for everyone",
   "main": "index.js",
   "scripts": {
@@ -34,13 +34,16 @@
   },
   "build": {
     "appId": "org.KChess.KChess",
-    "artifactName": "KChess-${version}.${ext}",
-    "win": {
-      "target": "nsis",
-      "icon": "/build/bk.ico"
-    },
+    "artifactName": "KChess-${version}.${ext}"
+  },
+  "win": {
+    "executableName": "KChess",
+    "target": "nsis",
+    "icon": "/build/bk.ico",
+    "category": "Utility"
+  },
   "linux": {
-    "executableName": "kchess",
+    "executableName": "KChess",
     "target": [
       "deb",
       "snap",
