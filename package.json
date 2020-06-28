@@ -1,6 +1,6 @@
 {
   "name": "KChess",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "A chess program for everyone",
   "main": "index.js",
   "scripts": {
@@ -22,14 +22,14 @@
   "homepage": "https://github.com/ketansingrole/KChess#readme",
   "devDependencies": {
     "electron": "^8.3.0",
-    "electron-builder": "^22.7.0"
+    "electron-builder": "22.4.1"
   },
   "dependencies": {
     "@chrisoakman/chessboardjs": "^1.0.0",
     "chess.js": "^0.10.3",
     "electron-json-storage": "^4.1.8",
     "electron-log": "^4.2.0",
-    "electron-updater": "^4.3.1",
+    "electron-updater": "4.2.5",
     "jquery": "^3.5.1"
   },
   "build": {
