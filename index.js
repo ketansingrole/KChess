@@ -2,6 +2,8 @@
 const { app, BrowserWindow } = require('electron')
 const { autoUpdater } = require("electron-updater")
 const log = require('electron-log');
+
+
 const path = require('path')
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
@@ -62,6 +64,6 @@ autoUpdater.on('update-downloaded', (info) => {
 app.on('window-all-closed', () => {
   app.quit();
 });
-app.on('ready', function()  {
+app.on('ready', function () {
   autoUpdater.checkForUpdatesAndNotify();
 });

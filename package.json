@@ -30,7 +30,8 @@
     "electron-json-storage": "^4.1.8",
     "electron-log": "^4.2.0",
     "electron-updater": "4.2.5",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "stockfish": "^11.0.0"
   },
   "build": {
     "appId": "org.KChess.KChess",
