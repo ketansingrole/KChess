@@ -42,38 +42,6 @@
 <script>
   const sound = new Audio();
   sound.src = "../assets/audio/Move.mp3";
-  function textToSpeech(text_position) {
-    // get all voices that browser offers
-    var available_voices = window.speechSynthesis.getVoices();
-
-    // this will hold an english voice
-    var english_voice = "";
-
-    // find voice by language locale "en-US"
-    // if not then select the first voice
-    for (var i = 0; i < available_voices.length; i++) {
-      if (available_voices[i].lang === "en-US") {
-        english_voice = available_voices[i];
-        break;
-      }
-    }
-    if (english_voice === "") english_voice = available_voices[0];
-
-    // new SpeechSynthesisUtterance object
-    var utter = new SpeechSynthesisUtterance();
-    utter.rate = 1;
-    utter.pitch = 0.5;
-    utter.text = text_position;
-    utter.voice = english_voice;
-
-    // event after text has been spoken
-    // utter.onend = function() {
-    // 	alert('Speech has finished');
-    // }
-
-    // speak
-    window.speechSynthesis.speak(utter);
-  }
   var chess = new Chess();
   let moveCount = 1;
   engine.onmessage = function (event) {
@@ -97,7 +65,7 @@
     sound.play();
     temp = chess.history();
 
-    textToSpeech(temp[temp.length - 1]);
+  
 
     if (moveCount % 2 === 0) {
       console.log(Math.round(moveCount / 2));
