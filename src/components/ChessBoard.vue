@@ -1,6 +1,10 @@
 <template>
-  <div class="blue merida">
-    <div ref="board" class="cg-board-wrap"></div>
+  <div class="felx m-5">
+    <div
+      ref="board"
+      class="cg-board-wrap"
+      style="width: 520px; height: 520px"
+    ></div>
   </div>
 </template>
 
@@ -11,31 +15,68 @@ import { Chessground } from "chessground";
 export default {
   name: "chessboard",
   data: function () {
-    return {
-      
-    };
+    return {};
   },
 
   methods: {
-    loadPosition(){
-
-      const config = {
-        fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    loadPosition() {
+      try {
+        this.board = Chessground(this.$refs.board, config);
+        const config = {
+          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          coordinates: true,
+          // check: true,
+          resizable: true,
+          drawable: {
+            enable: true,
+          },
+          animation: {
+            enabled: true,
+          },
+        };
+        this.board.set(config);
+        this.board.set({ movable: { events: { after: this.changeTurn() } } });
+        console.log(this.board.getFen());
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    changeTurn() {
+      return (orig, dest, metadata) => {
+        let positionBeforeMove = this.board.getFen();
+        console.log("turns changed" + orig + " " + dest + " " + metadata);
+        console.log("Source: " + orig);
+        console.log("Target: " + dest);
+        console.log("Old position: " + positionBeforeMove);
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        if (this.game.move({ from: orig, to: dest, promotion: "q" }) == null) {
+          console.log("illgal move");
+        }
+          this.board.set({
+            fen: this.game.fen(),
+          });
+        console.log("displaying chess values");
+        console.log(this.game.pgn());
+        console.log(this.game.fen()); // to fetch standard fen string could be used to pass to stockfish
       };
-
-      const ground = Chessground(this.$refs.board, config);
-
-      console.log(ground.getFen());
-    }
+    },
+    myEventHandler(e) {
+      // your code for handling resize...
+      console.log(e);
+      this.board.redrawAll();
+    },
   },
   mounted() {
     this.loadPosition();
+    this.board.redrawAll();
   },
   created() {
-    this.game = new Chess();
     this.board = null;
-    this.promotions = [];
-    this.promoteTo = "q";
+    this.game = new Chess();
+    window.addEventListener("resize", this.myEventHandler);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.myEventHandler);
   },
 };
 </script>
