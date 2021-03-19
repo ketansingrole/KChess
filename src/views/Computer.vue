@@ -1,3 +1,3 @@
 <template>
-    <H2>this is play with computer page</H2>
+  <h2>this is play with computer page</h2>
 </template>
