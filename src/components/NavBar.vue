@@ -1,16 +1,16 @@
 <template>
   <div class="nav-bar bg-gray-600 flex flex-col w-max h-screen">
-    <div id="home">
+    <div id="home" class="p-1">
       <router-link to="/"
         ><img id="home" src="../assets/home.svg" alt="home"
       /></router-link>
     </div>
-    <div id="computer">
+    <div id="computer" class="p-1">
       <router-link to="/computer">
         <img id="computer" src="../assets/desktop-outline.svg" alt="computer"
       /></router-link>
     </div>
-    <div id="settings" class="mt-auto">
+    <div id="settings" class="mt-auto p-2">
       <router-link to="/settings"
         ><img
           id="settings"

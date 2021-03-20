@@ -15,7 +15,9 @@ import { Chessground } from "chessground";
 export default {
   name: "chessboard",
   data: function () {
-    return {};
+    return {
+      
+    };
   },
 
   methods: {
@@ -52,12 +54,15 @@ export default {
         if (this.game.move({ from: orig, to: dest, promotion: "q" }) == null) {
           console.log("illgal move");
         }
-          this.board.set({
-            fen: this.game.fen(),
-          });
+        this.board.set({
+          fen: this.game.fen(),
+        });
         console.log("displaying chess values");
         console.log(this.game.pgn());
         console.log(this.game.fen()); // to fetch standard fen string could be used to pass to stockfish
+        
+        console.log(this.game.history);
+        
       };
     },
     myEventHandler(e) {
