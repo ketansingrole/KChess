@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-screen items-center justify-center">
+  <div class="flex w-screen h-screen items-center justify-center">
     <ChessBoard />
     <MoveTable />
   </div>
