@@ -4,7 +4,9 @@
       <tbody>
         <p v-show="false">{{ (inc = 0) }}</p>
         <tr
-          v-for="n in Math.round($store.state.analysisBoardHistory.length / 2)"
+          v-for="n in Math.round(
+            $store.state.analysisBoardData.moveList.length / 2
+          )"
           :key="n"
         >
           <div v-if="n % 2 === 0" class="bg-red-200">
@@ -12,10 +14,10 @@
               {{ n }}
             </td>
             <td class="w-32 text-center">
-              {{ $store.state.analysisBoardHistory[inc] }}
+              {{ $store.state.analysisBoardData.moveList[inc] }}
             </td>
             <td class="w-32 text-center">
-              {{ $store.state.analysisBoardHistory[inc + 1] }}
+              {{ $store.state.analysisBoardData.moveList[inc + 1] }}
             </td>
           </div>
           <div v-else>
@@ -23,10 +25,10 @@
               {{ n }}
             </td>
             <td class="w-32 text-center">
-              {{ $store.state.analysisBoardHistory[inc] }}
+              {{ $store.state.analysisBoardData.moveList[inc] }}
             </td>
             <td class="w-32 text-center">
-              {{ $store.state.analysisBoardHistory[inc + 1] }}
+              {{ $store.state.analysisBoardData.moveList[inc + 1] }}
             </td>
           </div>
           <p v-show="false">{{ (inc += 2) }}</p>

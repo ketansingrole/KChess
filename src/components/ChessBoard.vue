@@ -20,10 +20,13 @@ export default {
 
   methods: {
     loadPosition() {
+      console.log(
+        "load position fen" + this.$store.state.analysisBoardData.fen
+      );
       try {
         this.board = Chessground(this.$refs.board, config);
         const config = {
-          fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+          fen: this.$store.state.analysisBoardData.fen,
           coordinates: true,
           // check: true,
           resizable: true,
@@ -56,13 +59,20 @@ export default {
           fen: this.game.fen(),
         });
         console.log("displaying chess values");
-        console.log(this.game.pgn());
-        console.log(this.game.fen()); // to fetch standard fen string could be used to pass to stockfish
+        console.log("this.game.pgn " + this.game.pgn());
+        console.log("this.game.fen " + this.game.fen()); // to fetch standard fen string could be used to pass to stockfish
 
-        console.log(this.game.history());
+        console.log("this.game.history" + this.game.history());
 
-        this.$store.commit("updateBoardHistory", this.game.history());
+        this.$store.commit("updateMoveList", this.game.history());
+        this.$store.commit("updateFen", this.game.fen());
+        this.$store.commit("updatePgn", this.game.pgn());
         this.board.redrawAll();
+        console.log("store.fen" + this.$store.state.analysisBoardData.fen);
+        console.log("store.pgn" + this.$store.state.analysisBoardData.pgn);
+        console.log(
+          "store.history" + this.$store.state.analysisBoardData.moveList
+        );
       };
     },
     myEventHandler(e) {
@@ -78,6 +88,9 @@ export default {
   created() {
     this.board = null;
     this.game = new Chess();
+    if (this.$store.state.analysisBoardData.pgn) {
+      this.game.load_pgn(this.$store.state.analysisBoardData.pgn);
+    }
     window.addEventListener("resize", this.myEventHandler);
   },
   unmounted() {
