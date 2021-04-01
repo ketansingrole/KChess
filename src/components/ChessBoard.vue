@@ -1,9 +1,10 @@
 <template>
   <div class="felx m-5">
+    <!-- {{ boardId }} -->
     <div
       ref="board"
       class="cg-board-wrap"
-      style="width: 520px; height: 520px"
+      style="width: 800px; height: 800px"
     ></div>
   </div>
 </template>
@@ -13,6 +14,7 @@ import Chess from "chess.js";
 import { Chessground } from "chessground";
 
 export default {
+  props: ["boardId"],
   name: "chessboard",
   data: function () {
     return {};
@@ -20,13 +22,11 @@ export default {
 
   methods: {
     loadPosition() {
-      console.log(
-        "load position fen" + this.$store.state.analysisBoardData.fen
-      );
+      console.log("load position fen" + this.$store.state.boards[this.boardId].fen);
       try {
         this.board = Chessground(this.$refs.board, config);
         const config = {
-          fen: this.$store.state.analysisBoardData.fen,
+          fen: this.$store.state.boards[this.boardId].fen,
           coordinates: true,
           // check: true,
           resizable: true,
@@ -68,10 +68,10 @@ export default {
         this.$store.commit("updateFen", this.game.fen());
         this.$store.commit("updatePgn", this.game.pgn());
         this.board.redrawAll();
-        console.log("store.fen" + this.$store.state.analysisBoardData.fen);
-        console.log("store.pgn" + this.$store.state.analysisBoardData.pgn);
+        console.log("store.fen" + this.$store.state.boards[this.boardId].fen);
+        console.log("store.pgn" + this.$store.state.boards[this.boardId].pgn);
         console.log(
-          "store.history" + this.$store.state.analysisBoardData.moveList
+          "store.history" + this.$store.state.boards[this.boardId].moveList
         );
       };
     },
@@ -88,8 +88,8 @@ export default {
   created() {
     this.board = null;
     this.game = new Chess();
-    if (this.$store.state.analysisBoardData.pgn) {
-      this.game.load_pgn(this.$store.state.analysisBoardData.pgn);
+    if (this.$store.state.boards[this.boardId].pgn) {
+      this.game.load_pgn(this.$store.state.boards[this.boardId].pgn);
     }
     window.addEventListener("resize", this.myEventHandler);
   },
