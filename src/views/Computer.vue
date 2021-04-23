@@ -34,11 +34,25 @@ try {
 
   //console.log('performance', performance.now());
 
-  //  Use this in electron:serve mode
+  //  Use this in electron:serve mode for linux
   const spawn = require("child_process").spawn,
-    fish = spawn(process.cwd() +"/public/stockfish/stockfish_13_win_x64_bmi2.exe");
+    fish = spawn(
+      process.cwd() + "/public/stockfish/stockfish_13_linux_x64_bmi2"
+    );
 
-  //  Use this in electron:build mode
+  //  Use this in electron:build mode for linux
+  // const spawn = require("child_process").spawn,
+  //   fish = spawn(
+  //     process.cwd() + "/resources/extraResources/stockfish_13_linux_x64_bmi2"
+  //   );
+
+  //  Use this in electron:serve mode for windows
+  // const spawn = require("child_process").spawn,
+  //   fish = spawn(
+  //     process.cwd() + "/public/stockfish/stockfish_13_win_x64_bmi2.exe"
+  //   );
+
+  //  Use this in electron:build mode for windows
   // const spawn = require("child_process").spawn,
   //   fish = spawn(
   //     process.cwd() + "/resources/extraResources/stockfish_13_win_x64_bmi2.exe"

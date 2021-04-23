@@ -16,6 +16,11 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
 
+      navBar: '#36393F',
+      background: '#615F5F',
+      movetablebg: '#2F3136',
+      moveone: '#615F5F',
+      movetwo: '#36393F',
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,

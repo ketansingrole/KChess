@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar bg-gray-600 flex flex-col w-max h-screen">
+  <div class="nav-bar bg-navBar flex flex-col w-max h-screen">
     <div id="home" class="p-1">
       <router-link to="/"
         ><img id="home" src="../assets/home.svg" alt="home"

@@ -1,14 +1,19 @@
 <template>
   <!-- {{ boardId }} -->
-  <div class="flex w-1/4 h-1/2 overflow-y-scroll overflow-hidden m-5">
-    <table class="table-fixed w-full">
+  <div
+    class="flex w-1/4 h-1/2 overflow-y-scroll overflow-hidden m-5 p-5 bg-movetablebg"
+    style="padding-right: 0px; padding-bottom: 20px"
+  >
+    <table class="table-fixed w-full text-white">
       <tbody>
         <p v-show="false">{{ (inc = 0) }}</p>
         <tr
-          v-for="n in Math.round($store.state.boards[boardId].moveList.length / 2)"
+          v-for="n in Math.round(
+            $store.state.boards[boardId].moveList.length / 2
+          )"
           :key="n"
         >
-          <div v-if="n % 2 === 0" class="bg-red-200">
+          <div v-if="n % 2 === 0" class="bg-movetwo">
             <td class="text-center w-20 border-r border-green-600">
               {{ n }}
             </td>
@@ -19,7 +24,7 @@
               {{ $store.state.boards[boardId].moveList[inc + 1] }}
             </td>
           </div>
-          <div v-else>
+          <div v-else class="bg-moveone">
             <td class="text-center w-20 border-r border-green-600">
               {{ n }}
             </td>
