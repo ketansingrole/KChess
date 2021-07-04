@@ -1,25 +1,23 @@
 <template>
-  <div class="flex w-screen h-screen items-center justify-center">
-    <ChessBoard :boardId="0" />
-    <MoveTable :boardId="boardId" />
+  <div class="flex p-10 flex-col">
+    <div class="flex items-center justify-center space-x-20">
+      <ChessBoard :boardId="0" />
+      <MoveTable :boardId="0" />
+    </div>
   </div>
 </template>
 
 <script>
 import ChessBoard from "../components/ChessBoard.vue";
 import MoveTable from "../components/MoveTable.vue";
+
 export default {
-  data: function () {
+  data: function() {
     return {
       boardId: 0,
     };
   },
-  methods: {
-    created() {
-      // this.gameData = null;
-      // gameDataVal = this.$store.state.analysisBoardData;
-    },
-  },
+  methods: {},
 
   components: {
     ChessBoard,
@@ -28,5 +26,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

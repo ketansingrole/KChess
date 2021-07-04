@@ -1,7 +1,14 @@
 <template>
-  <!-- {{ boardId }} -->
   <div
-    class="flex w-1/4 h-1/2 overflow-y-scroll overflow-hidden m-5 p-5 bg-movetablebg"
+    class="
+      flex
+      w-1/4
+      h-1/2
+      overflow-y-scroll overflow-hidden
+      m-5
+      p-5
+      bg-movetablebg
+    "
     style="padding-right: 0px; padding-bottom: 20px"
   >
     <table class="table-fixed w-full text-white">

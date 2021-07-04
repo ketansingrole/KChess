@@ -1,6 +1,8 @@
 <template>
-  <div class="flex bg-background">
-    <NavBar />
+  <div class="flex bg-background h-screen w-screen">
+    <div class="flex w-40">
+      <NavBar />
+    </div>
     <router-view />
   </div>
 </template>

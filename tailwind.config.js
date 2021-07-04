@@ -21,6 +21,8 @@ module.exports = {
       movetablebg: '#2F3136',
       moveone: '#615F5F',
       movetwo: '#36393F',
+      redBtn: '#C03537',
+
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
